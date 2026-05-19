@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-
 import axios from 'axios'
 
 function App() {
@@ -16,6 +15,7 @@ function App() {
 
   const token = localStorage.getItem('token')
 
+  // GET TASKS
   const fetchTasks = async () => {
 
     try {
@@ -39,39 +39,91 @@ function App() {
 
   }
 
+  // CREATE TASK
   const addTask = async () => {
 
-    await axios.post(
-      'http://localhost:5000/api/tasks',
-      {
-        title,
-        description,
-        status,
-        due_date: dueDate
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
+    try {
 
-    fetchTasks()
+      await axios.post(
+        'http://localhost:5000/api/tasks',
+        {
+          title,
+          description,
+          status,
+          due_date: dueDate
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      // reset form
+      setTitle('')
+      setDescription('')
+      setStatus('todo')
+      setDueDate('')
+
+      fetchTasks()
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
 
   }
 
+  // UPDATE TASK
+  const updateTask = async (id) => {
+
+    try {
+
+      await axios.put(
+        `http://localhost:5000/api/tasks/${id}`,
+        {
+          title: 'Task Updated',
+          status: 'done'
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      fetchTasks()
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
+  }
+
+  // DELETE TASK
   const deleteTask = async (id) => {
 
-    await axios.delete(
-      `http://localhost:5000/api/tasks/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
+    try {
 
-    fetchTasks()
+      await axios.delete(
+        `http://localhost:5000/api/tasks/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      fetchTasks()
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
 
   }
 
@@ -91,22 +143,26 @@ function App() {
         Task Manager
       </h1>
 
+      {/* FORM */}
       <div className="card p-4 mb-4">
 
         <input
           className="form-control mb-3"
           placeholder="Title"
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <textarea
           className="form-control mb-3"
           placeholder="Description"
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
         <select
           className="form-select mb-3"
+          value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
 
@@ -127,6 +183,7 @@ function App() {
         <input
           className="form-control mb-3"
           type="date"
+          value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
         />
 
@@ -139,6 +196,7 @@ function App() {
 
       </div>
 
+      {/* TASK LIST */}
       {
         tasks.map((task) => (
 
@@ -159,12 +217,23 @@ function App() {
               <strong>Due Date:</strong> {task.due_date}
             </p>
 
-            <button
-              className="btn btn-danger"
-              onClick={() => deleteTask(task.id)}
-            >
-              Delete
-            </button>
+            <div className="d-flex gap-2">
+
+              <button
+                className="btn btn-warning"
+                onClick={() => updateTask(task.id)}
+              >
+                Update
+              </button>
+
+              <button
+                className="btn btn-danger"
+                onClick={() => deleteTask(task.id)}
+              >
+                Delete
+              </button>
+
+            </div>
 
           </div>
 
