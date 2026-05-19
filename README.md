@@ -238,6 +238,40 @@ After login, store the token in browser localStorage:
 ```js
 localStorage.setItem('token', 'YOUR_TOKEN')
 ```
+# 1. Desain Arsitektur Aplikasi
+
+Aplikasi menggunakan arsitektur client-server.
+
+- Frontend menggunakan React.js untuk menampilkan user interface.
+- Backend menggunakan Node.js dan Express.js sebagai REST API.
+- Database menggunakan MySQL untuk menyimpan data user dan task.
+- Frontend berkomunikasi dengan backend menggunakan Axios HTTP request.
+- Backend melakukan autentikasi JWT sebelum mengakses data database.
+
+---
+
+# 2. Desain Model Data / Schema Database
+
+## Tabel Users
+- id
+- username
+- password
+
+## Tabel Tasks
+- id
+- title
+- description
+- status
+- due_date
+- user_id
+
+## Tabel ActivityLogs
+- id
+- action
+
+Relasi:
+- 1 User memiliki banyak Task.
+- 1 Task dimiliki oleh 1 User.
 
 ---
 
@@ -327,3 +361,87 @@ Test scenarios:
 # Author
 
 Ilham Ar-rosyid
+# 5. Strategi Dasar Testing
+
+Testing dilakukan menggunakan Postman.
+
+Testing yang dilakukan:
+- Register dan login user
+- CRUD task
+- Testing JWT authentication
+- Testing invalid token
+- Testing akses endpoint tanpa login
+- Testing validasi input
+
+---
+# Task Manager App
+
+Simple Fullstack Task Manager Application using:
+
+- React.js
+- Node.js
+- Express.js
+- MySQL
+- Sequelize ORM
+- JWT Authentication
+- Bootstrap UI
+
+---
+
+# Features
+
+- User Register
+- User Login
+- JWT Authentication
+- Create Task
+- Get All Tasks
+- Update Task
+- Delete Task
+- Activity Logging
+- REST API
+- MySQL Database
+- Responsive Bootstrap UI
+
+---
+
+# Tech Stack
+
+## Frontend
+- React.js (Vite)
+- Axios
+- Bootstrap
+
+## Backend
+- Node.js
+- Express.js
+- Sequelize ORM
+- JWT
+- bcryptjs
+
+## Database
+- MySQL
+- phpMyAdmin
+
+---
+
+# Project Structure
+
+task-manager/
+│
+├── backend/
+│
+└── frontend/
+
+---
+
+# Database Setup
+
+Open phpMyAdmin:
+
+http://localhost/phpmyadmin
+
+Create database:
+
+```sql
+CREATE DATABASE task_manager;
+
