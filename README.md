@@ -1,75 +1,3 @@
-# Task Manager App
-
-Simple Fullstack Task Manager Application using:
-
-- React.js
-- Node.js
-- Express.js
-- MySQL
-- Sequelize ORM
-- JWT Authentication
-- Bootstrap UI
-
----
-
-# Features
-
-- User Register
-- User Login
-- JWT Authentication
-- Create Task
-- Get All Tasks
-- Update Task
-- Delete Task
-- Activity Logging
-- REST API
-- MySQL Database
-- Responsive Bootstrap UI
-
----
-
-# Tech Stack
-
-## Frontend
-- React.js (Vite)
-- Axios
-- Bootstrap
-
-## Backend
-- Node.js
-- Express.js
-- Sequelize ORM
-- JWT
-- bcryptjs
-
-## Database
-- MySQL
-- phpMyAdmin
-
----
-
-# Project Structure
-
-task-manager/
-│
-├── backend/
-│
-└── frontend/
-
----
-
-# Database Setup
-
-Open phpMyAdmin:
-
-http://localhost/phpmyadmin
-
-Create database:
-
-```sql
-CREATE DATABASE task_manager;
-
-
 # 1. Desain Arsitektur Aplikasi
 
 Aplikasi menggunakan arsitektur client-server.
@@ -148,3 +76,76 @@ Testing yang dilakukan:
 - Testing invalid token
 - Testing akses endpoint tanpa login
 - Testing validasi input
+
+---
+# Task Manager App
+
+Simple Fullstack Task Manager Application using:
+
+- React.js
+- Node.js
+- Express.js
+- MySQL
+- Sequelize ORM
+- JWT Authentication
+- Bootstrap UI
+
+---
+
+# Features
+
+- User Register
+- User Login
+- JWT Authentication
+- Create Task
+- Get All Tasks
+- Update Task
+- Delete Task
+- Activity Logging
+- REST API
+- MySQL Database
+- Responsive Bootstrap UI
+
+---
+
+# Tech Stack
+
+## Frontend
+- React.js (Vite)
+- Axios
+- Bootstrap
+
+## Backend
+- Node.js
+- Express.js
+- Sequelize ORM
+- JWT
+- bcryptjs
+
+## Database
+- MySQL
+- phpMyAdmin
+
+---
+
+# Project Structure
+
+task-manager/
+│
+├── backend/
+│
+└── frontend/
+
+---
+
+# Database Setup
+
+Open phpMyAdmin:
+
+http://localhost/phpmyadmin
+
+Create database:
+
+```sql
+CREATE DATABASE task_manager;
+
