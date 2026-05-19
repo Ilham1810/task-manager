@@ -13,6 +13,8 @@ function App() {
 
   const [dueDate, setDueDate] = useState('')
 
+  const [editId, setEditId] = useState(null)
+
   const token = localStorage.getItem('token')
 
   // GET TASKS
@@ -59,11 +61,7 @@ function App() {
         }
       )
 
-      // reset form
-      setTitle('')
-      setDescription('')
-      setStatus('todo')
-      setDueDate('')
+      resetForm()
 
       fetchTasks()
 
@@ -75,16 +73,33 @@ function App() {
 
   }
 
+  // EDIT BUTTON
+  const editTask = (task) => {
+
+    setEditId(task.id)
+
+    setTitle(task.title)
+
+    setDescription(task.description)
+
+    setStatus(task.status)
+
+    setDueDate(task.due_date?.split('T')[0])
+
+  }
+
   // UPDATE TASK
-  const updateTask = async (id) => {
+  const updateTask = async () => {
 
     try {
 
       await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
+        `http://localhost:5000/api/tasks/${editId}`,
         {
-          title: 'Task Updated',
-          status: 'done'
+          title,
+          description,
+          status,
+          due_date: dueDate
         },
         {
           headers: {
@@ -92,6 +107,8 @@ function App() {
           }
         }
       )
+
+      resetForm()
 
       fetchTasks()
 
@@ -124,6 +141,21 @@ function App() {
       console.log(error)
 
     }
+
+  }
+
+  // RESET FORM
+  const resetForm = () => {
+
+    setTitle('')
+
+    setDescription('')
+
+    setStatus('todo')
+
+    setDueDate('')
+
+    setEditId(null)
 
   }
 
@@ -187,12 +219,27 @@ function App() {
           onChange={(e) => setDueDate(e.target.value)}
         />
 
-        <button
-          className="btn btn-primary"
-          onClick={addTask}
-        >
-          Add Task
-        </button>
+        {
+          editId ? (
+
+            <button
+              className="btn btn-warning"
+              onClick={updateTask}
+            >
+              Update Task
+            </button>
+
+          ) : (
+
+            <button
+              className="btn btn-primary"
+              onClick={addTask}
+            >
+              Add Task
+            </button>
+
+          )
+        }
 
       </div>
 
@@ -221,9 +268,9 @@ function App() {
 
               <button
                 className="btn btn-warning"
-                onClick={() => updateTask(task.id)}
+                onClick={() => editTask(task)}
               >
-                Update
+                Edit
               </button>
 
               <button
